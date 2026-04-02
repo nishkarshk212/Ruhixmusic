@@ -275,3 +275,7 @@ pyrogram.errors.exceptions.bad_request_400.QueryIdInvalid: Telegram says: [400 Q
 [02-Apr-26 23:25:35 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
 [02-Apr-26 23:25:36 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
 [02-Apr-26 23:25:36 - INFO] - NexGenAPI - ✅ [NEXGEN] File already exists: downloads/nWbj7W_pD9U.m4a
+[02-Apr-26 23:29:57 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:29:57 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:29:57 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:29:57 - INFO] - NexGenAPI - ✅ [NEXGEN] File already exists: downloads/nWbj7W_pD9U.m4a

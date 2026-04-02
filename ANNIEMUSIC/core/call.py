@@ -504,13 +504,20 @@ class Call(PyTgCalls):
             await self.five.start()
 
     async def decorators(self):
-        for string, client in [
-            (config.STRING1, self.one),
-            (config.STRING2, self.two) if config.STRING2 else None,
-            (config.STRING3, self.three) if config.STRING3 else None,
-            (config.STRING4, self.four) if config.STRING4 else None,
-            (config.STRING5, self.five) if config.STRING5 else None,
-        ]:
+        # Build list of active clients only
+        active_clients = []
+        if config.STRING1:
+            active_clients.append((config.STRING1, self.one))
+        if config.STRING2:
+            active_clients.append((config.STRING2, self.two))
+        if config.STRING3:
+            active_clients.append((config.STRING3, self.three))
+        if config.STRING4:
+            active_clients.append((config.STRING4, self.four))
+        if config.STRING5:
+            active_clients.append((config.STRING5, self.five))
+        
+        for string, client in active_clients:
             if not string or not client:
                 continue
             @client.on_update()

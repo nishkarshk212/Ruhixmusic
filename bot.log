@@ -243,3 +243,35 @@ Traceback (most recent call last):
 pyrogram.errors.exceptions.bad_request_400.QueryIdInvalid: Telegram says: [400 QUERY_ID_INVALID] (caused by "messages.SetBotCallbackAnswer") Pyrogram 2.3.69 thinks: The callback query id is invalid
 [02-Apr-26 23:03:33 - WARNING] - asyncio - socket.send() raised exception.
 [02-Apr-26 23:03:33 - WARNING] - asyncio - socket.send() raised exception.
+[02-Apr-26 23:17:35 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:17:35 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:17:37 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:17:42 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:17:42 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:17:43 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:17:48 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:17:48 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:17:48 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:17:48 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/nWbj7W_pD9U?api=NxGBNexGenBots448436
+[02-Apr-26 23:17:51 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/nWbj7W_pD9U.m4a
+[02-Apr-26 23:18:16 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:18:16 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:18:17 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:18:17 - INFO] - NexGenAPI - ✅ [NEXGEN] File already exists: downloads/nWbj7W_pD9U.m4a
+[02-Apr-26 23:22:54 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: b9g4xNY-q9k
+[02-Apr-26 23:22:54 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/b9g4xNY-q9k
+[02-Apr-26 23:22:56 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:23:01 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: b9g4xNY-q9k
+[02-Apr-26 23:23:01 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/b9g4xNY-q9k
+[02-Apr-26 23:23:02 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:23:07 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: b9g4xNY-q9k
+[02-Apr-26 23:23:07 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/b9g4xNY-q9k
+[02-Apr-26 23:23:08 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:23:13 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: b9g4xNY-q9k
+[02-Apr-26 23:23:13 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/b9g4xNY-q9k
+[02-Apr-26 23:23:13 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:23:13 - INFO] - NexGenAPI - ✅ [NEXGEN] File already exists: downloads/b9g4xNY-q9k.m4a
+[02-Apr-26 23:25:35 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: nWbj7W_pD9U
+[02-Apr-26 23:25:35 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/nWbj7W_pD9U
+[02-Apr-26 23:25:36 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:25:36 - INFO] - NexGenAPI - ✅ [NEXGEN] File already exists: downloads/nWbj7W_pD9U.m4a

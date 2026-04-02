@@ -280,16 +280,30 @@ class Call(PyTgCalls):
         language = await get_lang(chat_id)
         _ = get_string(language)
         stream = self._build_stream(link, video=bool(video))
-        try:
-            await self._play_on_assistant(assistant, chat_id, stream)
-        except exceptions.NoActiveGroupCall:
-            raise AssistantErr(_["call_8"])
-        except exceptions.NoAudioSourceFound:
-            raise AssistantErr(_["call_10"])
-        except (ConnectionNotFound, TelegramServerError):
-            raise AssistantErr(_["call_10"])
-        except Exception:
-            raise AssistantErr(_["call_10"])
+        
+        # Retry logic for NoActiveGroupCall - sometimes voice chat takes time to be detected
+        max_retries = 2
+        retry_delay = 1.5  # seconds
+        
+        for attempt in range(max_retries):
+            try:
+                await self._play_on_assistant(assistant, chat_id, stream)
+                break  # Success, exit retry loop
+            except exceptions.NoActiveGroupCall:
+                if attempt < max_retries - 1:
+                    # Wait and retry
+                    await asyncio.sleep(retry_delay)
+                    continue
+                else:
+                    # Final attempt failed, show helpful error
+                    raise AssistantErr(_["call_8"])
+            except exceptions.NoAudioSourceFound:
+                raise AssistantErr(_["call_10"])
+            except (ConnectionNotFound, TelegramServerError):
+                raise AssistantErr(_["call_10"])
+            except Exception:
+                raise AssistantErr(_["call_10"])
+        
         await add_active_chat(chat_id)
         await music_on(chat_id)
         if video:

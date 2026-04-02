@@ -311,3 +311,14 @@ YoutubeSearch Results: [{'id': 'nWbj7W_pD9U', 'thumbnails': ['https://i.ytimg.co
 [02-Apr-26 23:36:12 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
 [02-Apr-26 23:36:12 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/ShPTaCJqeFo?api=NxGBNexGenBots448436
 [02-Apr-26 23:36:15 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/ShPTaCJqeFo.m4a
+[02-Apr-26 23:40:55 - INFO] - ANNIEMUSIC.core.mongo - Connecting to your Mongo Database...
+[02-Apr-26 23:40:55 - INFO] - ANNIEMUSIC.core.mongo - Connected to your Mongo Database.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 148, in _get_module_details
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/__init__.py", line 10, in <module>
+    dirr()
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/core/dir.py", line 16, in dirr
+    os.mkdir("downloads")
+FileExistsError: [Errno 17] File exists: 'downloads'

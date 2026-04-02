@@ -47,7 +47,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
         )
-        self.one = PyTgCalls(self.userbot1, cache_duration=100)
+        self.one = PyTgCalls(self.userbot1, cache_duration=300)
 
         self.userbot2 = Client(
             name="ANNIE2",
@@ -55,7 +55,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
         )
-        self.two = PyTgCalls(self.userbot2, cache_duration=100)
+        self.two = PyTgCalls(self.userbot2, cache_duration=300) if config.STRING2 else None
 
         self.userbot3 = Client(
             name="ANNIE3",
@@ -63,7 +63,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
         )
-        self.three = PyTgCalls(self.userbot3, cache_duration=100)
+        self.three = PyTgCalls(self.userbot3, cache_duration=300) if config.STRING3 else None
 
         self.userbot4 = Client(
             name="ANNIE4",
@@ -71,7 +71,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
         )
-        self.four = PyTgCalls(self.userbot4, cache_duration=100)
+        self.four = PyTgCalls(self.userbot4, cache_duration=300) if config.STRING4 else None
 
         self.userbot5 = Client(
             name="ANNIE5",
@@ -79,7 +79,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
         )
-        self.five = PyTgCalls(self.userbot5, cache_duration=100)
+        self.five = PyTgCalls(self.userbot5, cache_duration=300) if config.STRING5 else None
 
     def _build_stream(
         self,
@@ -139,13 +139,13 @@ class Call(PyTgCalls):
 
     async def stop_stream_force(self, chat_id: int):
         for string, client in [
-            (config.STRING1, self.one),
-            (config.STRING2, self.two),
-            (config.STRING3, self.three),
-            (config.STRING4, self.four),
-            (config.STRING5, self.five),
+            (config.STRING1, self.one) if config.STRING1 else None,
+            (config.STRING2, self.two) if config.STRING2 else None,
+            (config.STRING3, self.three) if config.STRING3 else None,
+            (config.STRING4, self.four) if config.STRING4 else None,
+            (config.STRING5, self.five) if config.STRING5 else None,
         ]:
-            if not string:
+            if not string or not client:
                 continue
             try:
                 await client.leave_call(chat_id, close=False)
@@ -470,40 +470,40 @@ class Call(PyTgCalls):
 
     async def ping(self):
         pings = []
-        if config.STRING1:
-            pings.append(self.one.ping)
-        if config.STRING2:
-            pings.append(self.two.ping)
-        if config.STRING3:
-            pings.append(self.three.ping)
-        if config.STRING4:
-            pings.append(self.four.ping)
-        if config.STRING5:
-            pings.append(self.five.ping)
+        if config.STRING1 and self.one:
+            pings.append(await self.one.ping)
+        if config.STRING2 and self.two:
+            pings.append(await self.two.ping)
+        if config.STRING3 and self.three:
+            pings.append(await self.three.ping)
+        if config.STRING4 and self.four:
+            pings.append(await self.four.ping)
+        if config.STRING5 and self.five:
+            pings.append(await self.five.ping)
         return str(round(sum(pings) / len(pings), 3)) if pings else "0"
 
     async def start(self):
         LOGGER(__name__).info("Starting PyTgCalls Client...\n")
         if config.STRING1:
             await self.one.start()
-        if config.STRING2:
+        if config.STRING2 and self.two:
             await self.two.start()
-        if config.STRING3:
+        if config.STRING3 and self.three:
             await self.three.start()
-        if config.STRING4:
+        if config.STRING4 and self.four:
             await self.four.start()
-        if config.STRING5:
+        if config.STRING5 and self.five:
             await self.five.start()
 
     async def decorators(self):
         for string, client in [
             (config.STRING1, self.one),
-            (config.STRING2, self.two),
-            (config.STRING3, self.three),
-            (config.STRING4, self.four),
-            (config.STRING5, self.five),
+            (config.STRING2, self.two) if config.STRING2 else None,
+            (config.STRING3, self.three) if config.STRING3 else None,
+            (config.STRING4, self.four) if config.STRING4 else None,
+            (config.STRING5, self.five) if config.STRING5 else None,
         ]:
-            if not string:
+            if not string or not client:
                 continue
             @client.on_update()
             async def _update_handler(_, update: types.Update, _client=client):

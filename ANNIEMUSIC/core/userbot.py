@@ -13,6 +13,7 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
             no_updates=True,
+            workers=4,
         )
         self.two = Client(
             name="Annie2",
@@ -20,28 +21,32 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
             no_updates=True,
-        )
+            workers=4,
+        ) if config.STRING2 else None
         self.three = Client(
             name="Annie3",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
             no_updates=True,
-        )
+            workers=4,
+        ) if config.STRING3 else None
         self.four = Client(
             name="Annie4",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
             no_updates=True,
-        )
+            workers=4,
+        ) if config.STRING4 else None
         self.five = Client(
             name="Annie5",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
             no_updates=True,
-        )
+            workers=4,
+        ) if config.STRING5 else None
 
     async def start(self):
         from .. import app
@@ -67,7 +72,7 @@ class Userbot(Client):
             assistantids.append(self.one.id)
             LOGGER(__name__).info(f"Assistant Started as {self.one.name}")
 
-        if config.STRING2:
+        if config.STRING2 and self.two:
             await self.two.start()
             try:
                 await self.two.join_chat("BROKENXNETWORK")
@@ -88,7 +93,7 @@ class Userbot(Client):
             assistantids.append(self.two.id)
             LOGGER(__name__).info(f"Assistant Two Started as {self.two.name}")
 
-        if config.STRING3:
+        if config.STRING3 and self.three:
             await self.three.start()
             try:
                 await self.three.join_chat("BROKENXNETWORK")
@@ -109,7 +114,7 @@ class Userbot(Client):
             assistantids.append(self.three.id)
             LOGGER(__name__).info(f"Assistant Three Started as {self.three.name}")
 
-        if config.STRING4:
+        if config.STRING4 and self.four:
             await self.four.start()
             try:
                 await self.four.join_chat("BROKENXNETWORK")
@@ -130,7 +135,7 @@ class Userbot(Client):
             assistantids.append(self.four.id)
             LOGGER(__name__).info(f"Assistant Four Started as {self.four.name}")
 
-        if config.STRING5:
+        if config.STRING5 and self.five:
             await self.five.start()
             try:
                 await self.five.join_chat("BROKENXNETWORK")
@@ -155,15 +160,15 @@ class Userbot(Client):
         from .. import app
         LOGGER(__name__).info(f"**{app.name} Assistant ...**")
         try:
-            if config.STRING1:
+            if config.STRING1 and self.one:
                 await self.one.stop()
-            if config.STRING2:
+            if config.STRING2 and self.two:
                 await self.two.stop()
-            if config.STRING3:
+            if config.STRING3 and self.three:
                 await self.three.stop()
-            if config.STRING4:
+            if config.STRING4 and self.four:
                 await self.four.stop()
-            if config.STRING5:
+            if config.STRING5 and self.five:
                 await self.five.stop()
         except:
             pass

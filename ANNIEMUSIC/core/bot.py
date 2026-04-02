@@ -11,8 +11,9 @@ class JARVIS(Client):
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
-            in_memory=True,
+            in_memory=False,
             max_concurrent_transmissions=7,
+            workers=8,
         )
 
     async def start(self):

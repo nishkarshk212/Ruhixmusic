@@ -25,9 +25,6 @@
 [02-Apr-26 21:31:15 - INFO] - ANNIEMUSIC.core.call - Starting PyTgCalls Client...
 
 [02-Apr-26 21:31:16 - INFO] - MUSICBROKN - Annie Music Robot Started Successfully...
-[02-Apr-26 21:31:02 - INFO] - root - Stop signal received (SIGTERM). Exiting...
-[02-Apr-26 21:31:02 - INFO] - ANNIEMUSIC.core.userbot - **˹🇱ɪʟʏ ꭙ 🇲ᴜsɪᴄ˼ ♪  Assistant ...**
-[02-Apr-26 21:31:02 - INFO] - MUSICBROKN - sᴛᴏᴘɪɴɢ ʙʀᴏᴋᴇɴ x ᴍᴜsɪᴄ ʙᴏᴛ ...
 Failed to initialize Lexica API: API error <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
@@ -72,11 +69,11 @@ b.send(JSON.stringify(a));c.classList.add("feedback-hidden");d.classList.remove(
                     </h1>
                     <span
                         class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed"
-                        >Ray ID: 9e60fd89d91afcec &bull;</span
+                        >Ray ID: 9e610d091cf9fd8b &bull;</span
                     >
                     <span
                         class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed"
-                        >2026-04-02 15:50:38 UTC</span
+                        >2026-04-02 16:01:13 UTC</span
                     >
                     <h2
                         class="text-gray-600 leading-1.3 text-3xl lg:text-2xl font-light"
@@ -140,7 +137,7 @@ b.send(JSON.stringify(a));c.classList.add("feedback-hidden");d.classList.remove(
     </div>
 </div> <div class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
     <p class="text-13">
-      <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold">9e60fd89d91afcec</strong></span>
+      <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold">9e610d091cf9fd8b</strong></span>
       <span class="cf-footer-separator sm:hidden">&bull;</span>
       <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
         Your IP:
@@ -167,7 +164,33 @@ b.send(JSON.stringify(a));c.classList.add("feedback-hidden");d.classList.remove(
     </body>
 </html>
 ๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: BROKENXNETWORK !
-[02-Apr-26 21:31:02 - ERROR] - asyncio - Unclosed client session
-client_session: <aiohttp.client.ClientSession object at 0x12852f350>
-[02-Apr-26 21:31:02 - ERROR] - asyncio - Unclosed client session
-client_session: <aiohttp.client.ClientSession object at 0x1285514d0>
+๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: BROKENXNETWORK !
+๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: BROKENXNETWORK !
+[02-Apr-26 22:36:27 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: 8Tvu7B5vFLg
+[02-Apr-26 22:36:27 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/8Tvu7B5vFLg
+[02-Apr-26 22:36:30 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:36:35 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: 8Tvu7B5vFLg
+[02-Apr-26 22:36:35 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/8Tvu7B5vFLg
+[02-Apr-26 22:36:35 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:36:40 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: 8Tvu7B5vFLg
+[02-Apr-26 22:36:40 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/8Tvu7B5vFLg
+[02-Apr-26 22:36:41 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 22:36:41 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/8Tvu7B5vFLg?api=NxGBNexGenBots448436
+[02-Apr-26 22:36:44 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/8Tvu7B5vFLg.m4a
+[02-Apr-26 22:43:14 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: YjjLZpeIEN8
+[02-Apr-26 22:43:14 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/YjjLZpeIEN8
+[02-Apr-26 22:43:17 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:43:22 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: YjjLZpeIEN8
+[02-Apr-26 22:43:22 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/YjjLZpeIEN8
+[02-Apr-26 22:43:22 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 22:43:22 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/YjjLZpeIEN8?api=NxGBNexGenBots448436
+[02-Apr-26 22:43:24 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/YjjLZpeIEN8.m4a
+[02-Apr-26 22:46:32 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: -5BWiP2TgiI
+[02-Apr-26 22:46:32 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/-5BWiP2TgiI
+[02-Apr-26 22:46:33 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:46:38 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: -5BWiP2TgiI
+[02-Apr-26 22:46:38 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/-5BWiP2TgiI
+[02-Apr-26 22:46:39 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:46:44 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: -5BWiP2TgiI
+[02-Apr-26 22:46:44 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/-5BWiP2TgiI
+[02-Apr-26 22:46:45 - WARNING] - NexGenAPI - ⚠️ [NEXGEN] Unexpected status: error

@@ -91,6 +91,11 @@ class Call(PyTgCalls):
         if not source:
             raise ValueError("Media source cannot be empty")
         
+        # Enhanced audio quality with stereo and better bitrate
+        custom_ffmpeg = "-ac 2 -ar 48000 -b:a 320k"
+        if ffmpeg:
+            custom_ffmpeg = f"{ffmpeg} {custom_ffmpeg}"
+        
         return types.MediaStream(
             media_path=source,
             audio_parameters=types.AudioQuality.HIGH,
@@ -101,7 +106,7 @@ class Call(PyTgCalls):
                 if video
                 else types.MediaStream.Flags.IGNORE
             ),
-            ffmpeg_parameters=ffmpeg,
+            ffmpeg_parameters=custom_ffmpeg,
         )
 
     async def _play_on_assistant(

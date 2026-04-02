@@ -1,0 +1,14 @@
+[Unit]
+Description=ANNIEMUSIC Bot Auto Maintenance Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/Ruhixmusic
+ExecStart=/bin/bash /root/Ruhixmusic/auto_maintenance.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Run ANNIEMUSIC Bot Auto Maintenance Every 24 Hours
+Requires=anniex-maintenance.service
+
+[Timer]
+OnBootSec=1h
+OnUnitActiveSec=24h
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

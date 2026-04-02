@@ -8,11 +8,13 @@ LOGGER(__name__).info("Connecting to your Mongo Database...")
 try:
     _mongo_async_ = AsyncIOMotorClient(
         MONGO_DB_URI,
-        maxPoolSize=50,
-        minPoolSize=10,
-        serverSelectionTimeoutMS=5000,
-        connectTimeoutMS=10000,
-        socketTimeoutMS=20000,
+        maxPoolSize=100,  # Increased from 50 for faster DB access
+        minPoolSize=20,   # Increased from 10
+        serverSelectionTimeoutMS=3000,  # Reduced from 5000 for quicker fail
+        connectTimeoutMS=5000,          # Reduced from 10000
+        socketTimeoutMS=10000,          # Reduced from 20000
+        retryWrites=True,
+        retryReads=True,
     )
     mongodb = _mongo_async_.Anon
     # Test connection

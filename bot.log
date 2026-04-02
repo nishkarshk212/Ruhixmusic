@@ -203,3 +203,43 @@ b.send(JSON.stringify(a));c.classList.add("feedback-hidden");d.classList.remove(
 [02-Apr-26 22:52:24 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: GsqdP7lzdWM
 [02-Apr-26 22:52:24 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/GsqdP7lzdWM
 [02-Apr-26 22:52:25 - WARNING] - NexGenAPI - ⚠️ [NEXGEN] Unexpected status: error
+[02-Apr-26 23:00:15 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: 0v5eHPfy5Lk
+[02-Apr-26 23:00:15 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/0v5eHPfy5Lk
+[02-Apr-26 23:00:16 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:00:21 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: 0v5eHPfy5Lk
+[02-Apr-26 23:00:21 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/0v5eHPfy5Lk
+[02-Apr-26 23:00:21 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:00:21 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/0v5eHPfy5Lk?api=NxGBNexGenBots448436
+[02-Apr-26 23:00:24 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/0v5eHPfy5Lk.m4a
+[02-Apr-26 23:03:24 - ERROR] - pyrogram.dispatcher - Unhandled exception: Telegram says: [400 QUERY_ID_INVALID] (caused by "messages.SetBotCallbackAnswer") Pyrogram 2.3.69 thinks: The callback query id is invalid
+Traceback (most recent call last):
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 383, in _dispatch_to_handlers
+    await self._execute_handler(handler, *args)
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/dispatcher.py", line 410, in _execute_handler
+    await handler.callback(self.client, *args)
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/handlers/callback_query_handler.py", line 207, in resolve_future_or_callback
+    await self.original_callback(client, query, *args)
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/utils/decorators/language.py", line 42, in wrapper
+    return await mystic(_, CallbackQuery, language)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/plugins/admins/callback.py", line 262, in del_back_playlist
+    await CallbackQuery.answer()
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/types/bots_and_keyboards/callback_query.py", line 171, in answer
+    return await self._client.answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/bots/answer_callback_query.py", line 74, in answer_callback_query
+    return await self.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/advanced/invoke.py", line 80, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 420, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 377, in send
+    RPCError.raise_it(result, type(data))
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/errors/rpc_error.py", line 93, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.QueryIdInvalid: Telegram says: [400 QUERY_ID_INVALID] (caused by "messages.SetBotCallbackAnswer") Pyrogram 2.3.69 thinks: The callback query id is invalid
+[02-Apr-26 23:03:33 - WARNING] - asyncio - socket.send() raised exception.
+[02-Apr-26 23:03:33 - WARNING] - asyncio - socket.send() raised exception.

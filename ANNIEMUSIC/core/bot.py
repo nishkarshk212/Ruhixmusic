@@ -13,7 +13,8 @@ class JARVIS(Client):
             bot_token=config.BOT_TOKEN,
             in_memory=False,
             max_concurrent_transmissions=7,
-            workers=8,
+            workers=32,  # Increased from 8 for faster response
+            sleep_threshold=1,  # Reduced from default 5 for quicker responses
         )
 
     async def start(self):

@@ -13,7 +13,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
             no_updates=True,
-            workers=4,
+            workers=16,  # Increased for faster assistant response
+            sleep_threshold=1,  # Reduced for quicker responses
         )
         self.two = Client(
             name="Annie2",
@@ -21,7 +22,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
             no_updates=True,
-            workers=4,
+            workers=16,
+            sleep_threshold=1,
         ) if config.STRING2 else None
         self.three = Client(
             name="Annie3",
@@ -29,7 +31,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
             no_updates=True,
-            workers=4,
+            workers=16,
+            sleep_threshold=1,
         ) if config.STRING3 else None
         self.four = Client(
             name="Annie4",
@@ -37,7 +40,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
             no_updates=True,
-            workers=4,
+            workers=16,
+            sleep_threshold=1,
         ) if config.STRING4 else None
         self.five = Client(
             name="Annie5",
@@ -45,7 +49,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
             no_updates=True,
-            workers=4,
+            workers=16,
+            sleep_threshold=1,
         ) if config.STRING5 else None
 
     async def start(self):

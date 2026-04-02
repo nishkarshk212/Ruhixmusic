@@ -47,7 +47,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
         )
-        self.one = PyTgCalls(self.userbot1, cache_duration=300)
+        self.one = PyTgCalls(self.userbot1, cache_duration=500)  # Increased cache for faster response
 
         self.userbot2 = Client(
             name="ANNIE2",
@@ -55,7 +55,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
         )
-        self.two = PyTgCalls(self.userbot2, cache_duration=300) if config.STRING2 else None
+        self.two = PyTgCalls(self.userbot2, cache_duration=500) if config.STRING2 else None
 
         self.userbot3 = Client(
             name="ANNIE3",
@@ -63,7 +63,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
         )
-        self.three = PyTgCalls(self.userbot3, cache_duration=300) if config.STRING3 else None
+        self.three = PyTgCalls(self.userbot3, cache_duration=500) if config.STRING3 else None
 
         self.userbot4 = Client(
             name="ANNIE4",
@@ -71,7 +71,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
         )
-        self.four = PyTgCalls(self.userbot4, cache_duration=300) if config.STRING4 else None
+        self.four = PyTgCalls(self.userbot4, cache_duration=500) if config.STRING4 else None
 
         self.userbot5 = Client(
             name="ANNIE5",
@@ -79,7 +79,7 @@ class Call(PyTgCalls):
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
         )
-        self.five = PyTgCalls(self.userbot5, cache_duration=300) if config.STRING5 else None
+        self.five = PyTgCalls(self.userbot5, cache_duration=500) if config.STRING5 else None
 
     def _build_stream(
         self,

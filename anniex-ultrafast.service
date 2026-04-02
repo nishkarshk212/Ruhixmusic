@@ -1,0 +1,31 @@
+[Unit]
+Description=ANNIEMUSIC Bot - Ultra Fast Mode
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/path/to/your/bot/directory
+ExecStart=/usr/bin/python3 -m ANNIEMUSIC
+Restart=always
+RestartSec=5
+
+# Performance optimizations
+LimitNOFILE=65535
+Nice=-10
+IOSchedulingClass=realtime
+IOSchedulingPriority=0
+
+# Environment variables
+Environment="ANNIEMUSIC_FAST_MODE=1"
+Environment="PYTHONUNBUFFERED=1"
+Environment="PYTHONDONTWRITEBYTECODE=1"
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=anniex
+
+[Install]
+WantedBy=multi-user.target

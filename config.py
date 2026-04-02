@@ -47,8 +47,8 @@ SONG_DOWNLOAD_DURATION = int(getenv("SONG_DOWNLOAD_DURATION", "9999999"))
 SONG_DOWNLOAD_DURATION_LIMIT = int(getenv("SONG_DOWNLOAD_DURATION_LIMIT", "9999999"))
 
 # API timeout settings (in seconds)
-API_TIMEOUT = int(getenv("API_TIMEOUT", "30"))  # Timeout for external API calls
-REQUEST_TIMEOUT = int(getenv("REQUEST_TIMEOUT", "60"))  # Timeout for download requests
+API_TIMEOUT = int(getenv("API_TIMEOUT", "15"))  # Reduced from 30 for faster response
+REQUEST_TIMEOUT = int(getenv("REQUEST_TIMEOUT", "30"))  # Reduced from 60 for faster downloads
 
 # External service credentials - Obtain these from Spotify
 SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "22b6125bfe224587b722d6815002db2b") #replace with your

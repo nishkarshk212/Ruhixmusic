@@ -40,6 +40,34 @@ from config import lyrical
 wrong = {}
 
 
+@app.on_callback_query(filters.regex("GetTimer") & ~BANNED_USERS)
+@languageCB
+async def check_timer(client, CallbackQuery: CallbackQuery, _):
+    await CallbackQuery.answer()
+    chat_id = CallbackQuery.message.chat.id
+    playing = db.get(chat_id)
+    if not playing:
+        return
+    try:
+        duration_seconds = int(playing[0]["seconds"])
+        if duration_seconds == 0:
+            return
+        mystic = playing[0]["mystic"]
+        language = await get_lang(chat_id)
+        _ = get_string(language)
+        buttons = stream_markup_timer(
+            _,
+            chat_id,
+            seconds_to_min(playing[0]["played"]),
+            playing[0]["dur"],
+        )
+        await mystic.edit_reply_markup(
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    except:
+        pass
+
+
 @app.on_callback_query(filters.regex("PanelMarkup") & ~BANNED_USERS)
 @languageCB
 async def markup_panel(client, CallbackQuery: CallbackQuery, _):
@@ -579,7 +607,7 @@ async def del_back_playlist(client, CallbackQuery, _):
         )
 
 async def markup_timer():
-    while not await asyncio.sleep(807):
+    while not await asyncio.sleep(10):
         active_chats = await get_active_chats()
         for chat_id in active_chats:
             try:
@@ -607,6 +635,11 @@ async def markup_timer():
                 except:
                     _ = get_string("en")
                 try:
+                    # Update played time based on elapsed seconds
+                    playing[0]["played"] += 10
+                    if playing[0]["played"] > duration_seconds:
+                        playing[0]["played"] = duration_seconds
+                    
                     buttons = stream_markup_timer(
                         _,
                         chat_id,

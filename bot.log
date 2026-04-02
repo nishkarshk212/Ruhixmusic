@@ -303,3 +303,11 @@ YoutubeSearch Results: [{'id': 'nWbj7W_pD9U', 'thumbnails': ['https://i.ytimg.co
 [02-Apr-26 23:32:49 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
 [02-Apr-26 23:32:49 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/BV0-rrdPJKw?api=NxGBNexGenBots448436
 [02-Apr-26 23:32:51 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/BV0-rrdPJKw.m4a
+[02-Apr-26 23:36:06 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: ShPTaCJqeFo
+[02-Apr-26 23:36:06 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/ShPTaCJqeFo
+[02-Apr-26 23:36:07 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 23:36:12 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: ShPTaCJqeFo
+[02-Apr-26 23:36:12 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/ShPTaCJqeFo
+[02-Apr-26 23:36:12 - INFO] - NexGenAPI - ✅ [NEXGEN] Got stream link, downloading...
+[02-Apr-26 23:36:12 - INFO] - NexGenAPI - 📥 [NEXGEN] Downloading from: https://pvtz.nexgenbots.xyz/stream/ShPTaCJqeFo?api=NxGBNexGenBots448436
+[02-Apr-26 23:36:15 - INFO] - NexGenAPI - ✅ [NEXGEN] Successfully downloaded: downloads/ShPTaCJqeFo.m4a

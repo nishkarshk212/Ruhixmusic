@@ -7,8 +7,8 @@ from ANNIEMUSIC import app
 AB = [
     [
         InlineKeyboardButton(
-            text="𝐁ʀᴏᴋᴇɴ 𝐗 𝐍ᴇᴛᴡᴏʀᴋ ☠️",
-            url="https://t.me/Brokenxnetwork",
+            text="˹🇴ρ ꭙ 🇧σтѕ ˼",
+            url="https://t.me/Tele_212_bots",
         ),
     ],
 ]

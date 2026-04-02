@@ -1,0 +1,45 @@
+bash: no job control in this shell
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.core.mongo - Connecting to your Mongo Database...
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.core.mongo - Connected to your Mongo Database.
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.core.dir - Directories Updated.
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.core.git - Git Client Found [VPS DEPLOYER]
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.misc - ᴅᴀᴛᴀʙᴀsᴇ ʟᴏᴀᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ💗
+[02-Apr-26 20:29:56 - INFO] - ANNIEMUSIC.core.bot - Starting Bot...
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - 🚀 BROKENXAPI INITIALIZED
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - ⚡ Powered by Broken X Network
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - 🔐 Join Telegram: @AboutBrokenX • @BrokenXNetwork1 For Future Updates
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - Thanks ❤‍🩹 For Using BrokenxAPI
+[02-Apr-26 20:29:56 - INFO] - BrokenXAPI - ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[02-Apr-26 20:29:58 - INFO] - ANNIEMUSIC.misc - sᴜᴅᴏ ᴜsᴇʀs ᴅᴏɴᴇ..
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/__main__.py", line 62, in <module>
+    asyncio.get_event_loop().run_until_complete(init())
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/__main__.py", line 36, in init
+    await app.start()
+  File "/Users/nishkarshkr/Desktop/Music bot/anniex/ANNIEMUSIC/core/bot.py", line 19, in start
+    await super().start()
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/utilities/start.py", line 63, in start
+    await self.authorize()
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/client.py", line 424, in authorize
+    return await self.sign_in_bot(self.bot_token)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/auth/sign_in_bot.py", line 52, in sign_in_bot
+    r = await self.invoke(
+        ^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/methods/advanced/invoke.py", line 80, in invoke
+    r = await self.session.invoke(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 420, in invoke
+    return await self.send(query, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/session/session.py", line 377, in send
+    RPCError.raise_it(result, type(data))
+  File "/Users/nishkarshkr/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pyrogram/errors/rpc_error.py", line 93, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.flood_420.FloodWait: Telegram says: [420 FLOOD_WAIT_X] (caused by "auth.ImportBotAuthorization") Pyrogram 2.3.69 thinks: A wait of 2437 seconds is required

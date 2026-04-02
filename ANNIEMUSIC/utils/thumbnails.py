@@ -118,7 +118,7 @@ async def get_thumb(videoid):
         
         # --- WATERMARK START (Transparent & Small) ---
         try:
-            wm_text = "Powered By Broken X Network"
+            wm_text = "Powered By ˹🇴ρ ꭙ 🇧σтѕ ˼"
             # Font size reduced to 20 for "Chota Font"
             wm_font = ImageFont.truetype("ANNIEMUSIC/assets/thumb/font.ttf", 20)
             

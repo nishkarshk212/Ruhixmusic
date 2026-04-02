@@ -6,7 +6,7 @@ async def farewell_message(client, message):
     message_text = """
     💗Hello, There! 
 
-    It's Your Mr Broken going off for a very long time period of 1 year
+    It's Your ꜱʜɪꜱʜɪᴍᴀɴᴜ going off for a very long time period of 1 year
 
     I'll be back Soon! 
 

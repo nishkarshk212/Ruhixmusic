@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardButton
 from ANNIEMUSIC.utils.formatters import time_to_seconds
 
 from ANNIEMUSIC import app
-from config import OWNER_USERNAME, SUPPORT_CHAT
+from config import OWNER_USERNAME, SUPPORT_CHAT, SUPPORT_CHANNEL
 
 def track_markup(_, user_id, channel, fplay):
     buttons = [
@@ -23,8 +23,8 @@ def track_markup(_, user_id, channel, fplay):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -80,8 +80,8 @@ def stream_markup_timer(_, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -136,8 +136,8 @@ def telegram_markup_timer(_, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -166,8 +166,8 @@ def stream_markup(_, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -190,8 +190,8 @@ def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -210,8 +210,8 @@ def livestream_markup(_, videoid, user_id, mode, channel, fplay):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -240,8 +240,8 @@ def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ👑",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -282,8 +282,8 @@ def queue_markup(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -316,8 +316,8 @@ def panel_markup_1(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -345,8 +345,8 @@ def panel_markup_2(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
@@ -373,8 +373,8 @@ def panel_markup_3(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="😈𝐌ʀ 𝐁ʀᴏᴋᴇɴ✨",
-                url=f"t.me/{OWNER_USERNAME}",
+                text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
+                url=f"{SUPPORT_CHANNEL}",
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",

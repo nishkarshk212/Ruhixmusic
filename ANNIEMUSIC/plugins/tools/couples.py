@@ -14,8 +14,8 @@ from ANNIEMUSIC.mongo.couples_db import _get_image, get_couple
 MARKBX = [
     [
         InlineKeyboardButton(
-            text="𝐁ʀᴏᴋᴇɴ 𝐗 𝐍ᴇᴛᴡᴏʀᴋ ☠️",
-            url=f"https://t.me/brokenxnetwork",
+            text="˹🇴ρ ꭙ 🇧σтѕ ˼",
+            url=f"https://t.me/Tele_212_bots",
         ),
     ],
 ]

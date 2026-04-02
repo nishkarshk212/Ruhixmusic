@@ -10,7 +10,8 @@ from pyrogram.types import (
 )
 import random
 from ANNIEMUSIC import app
-from config import ANNIE_VID, AYUV
+from ANNIEMUSIC.plugins.bot.start import ANNIE_VID
+from config import AYUV
 from ANNIEMUSIC.utils.database import (
     add_nonadmin_chat,
     get_authuser,

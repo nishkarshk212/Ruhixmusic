@@ -87,6 +87,10 @@ class Call(PyTgCalls):
         video: bool,
         ffmpeg: str | None = None,
     ) -> types.MediaStream:
+        # Validate source parameter
+        if not source:
+            raise ValueError("Media source cannot be empty")
+        
         return types.MediaStream(
             media_path=source,
             audio_parameters=types.AudioQuality.HIGH,
@@ -268,6 +272,10 @@ class Call(PyTgCalls):
         video: Union[bool, str] = None,
         image: Union[bool, str] = None,
     ):
+        # Validate link parameter
+        if not link:
+            raise AssistantErr("No valid stream link found. Please try again.")
+        
         assistant = await group_assistant(self, chat_id)
         language = await get_lang(chat_id)
         _ = get_string(language)

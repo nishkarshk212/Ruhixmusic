@@ -129,6 +129,9 @@ async def download_song(link: str) -> str:
                                         return file_path
                                     else:
                                         logger.error(f"❌ [NEXGEN] File empty or corrupted")
+                                        # Delete corrupted file
+                                        if os.path.exists(file_path):
+                                            os.remove(file_path)
                                         return None
                                 else:
                                     logger.error(f"❌ [NEXGEN] Stream download failed: {stream_response.status}")
@@ -140,10 +143,13 @@ async def download_song(link: str) -> str:
                             return await download_song(link)
                         else:
                             logger.warning(f"⚠️ [NEXGEN] Unexpected status: {status}")
+                            return None
                     else:
                         logger.warning(f"⚠️ [NEXGEN] Empty response")
+                        return None
                 else:
                     logger.warning(f"⚠️ [NEXGEN] API returned status {response.status}")
+                    return None
     except Exception as api_error:
         logger.error(f"❌ [NEXGEN] Failed: {api_error}")
         import traceback
@@ -188,10 +194,15 @@ async def download_video(link: str) -> str:
                         if os.path.exists(file_path):
                             logger.info(f"✅ [NEXGEN] Video file found: {file_path}")
                             return file_path
+                        else:
+                            logger.warning(f"⚠️ [NEXGEN] Video file not found after download")
+                            return None
                     else:
                         logger.warning(f"⚠️ [NEXGEN] Empty response")
+                        return None
                 else:
                     logger.warning(f"⚠️ [NEXGEN] API returned status {response.status}")
+                    return None
     except Exception as api_error:
         logger.error(f"❌ [NEXGEN] Failed: {api_error}")
         return None

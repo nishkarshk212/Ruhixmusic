@@ -194,3 +194,12 @@ b.send(JSON.stringify(a));c.classList.add("feedback-hidden");d.classList.remove(
 [02-Apr-26 22:46:44 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: -5BWiP2TgiI
 [02-Apr-26 22:46:44 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/-5BWiP2TgiI
 [02-Apr-26 22:46:45 - WARNING] - NexGenAPI - ⚠️ [NEXGEN] Unexpected status: error
+[02-Apr-26 22:52:11 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: GsqdP7lzdWM
+[02-Apr-26 22:52:11 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/GsqdP7lzdWM
+[02-Apr-26 22:52:13 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:52:18 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: GsqdP7lzdWM
+[02-Apr-26 22:52:18 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/GsqdP7lzdWM
+[02-Apr-26 22:52:19 - INFO] - NexGenAPI - ⏳ [NEXGEN] Still processing, waiting...
+[02-Apr-26 22:52:24 - INFO] - NexGenAPI - 🎵 [AUDIO] Starting download for: GsqdP7lzdWM
+[02-Apr-26 22:52:24 - INFO] - NexGenAPI - 🎵 [NEXGEN] Using API: https://pvtz.nexgenbots.xyz/song/GsqdP7lzdWM
+[02-Apr-26 22:52:25 - WARNING] - NexGenAPI - ⚠️ [NEXGEN] Unexpected status: error

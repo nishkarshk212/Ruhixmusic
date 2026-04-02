@@ -145,7 +145,7 @@ async def greet_new_member(_, member: ChatMemberUpdated):
 ➻ Iᴅ ✧ {user.id}
 ➻ Usᴇʀɴᴀᴍᴇ ✧ @{user.username}
 ➻ Tᴏᴛᴀʟ Mᴇᴍʙᴇʀs ✧ {count}
- 🇲 ᴀᴅᴇ 🇧ʏ 🇲ʀ  🇧ʀᴏᴋᴇɴ 
+ 🇲 ᴀᴅᴇ 🇧ʏ ˹🇯𝚊𝚢𝚍𝚎𝚗˼ 
 ▰▰▰▰▰▰▰▰▰▰▰▰▰**
 **❅─────✧❅✦❅✧─────❅**
 """,

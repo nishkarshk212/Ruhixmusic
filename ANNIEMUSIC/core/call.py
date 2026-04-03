@@ -118,13 +118,20 @@ class Call(PyTgCalls):
         import asyncio
         
         LOGGER(__name__).info(f"🎵 Attempting to play stream in {chat_id}")
+        
         try:
-            # Try to get participants to verify we're in the voice chat
+            # First verify assistant is in the voice chat by getting participants
             try:
                 participants = await client.get_participants(chat_id)
                 LOGGER(__name__).info(f"👥 Found {len(participants)} participants in voice chat {chat_id}")
+                
+                if len(participants) == 0:
+                    LOGGER(__name__).warning(f"⚠️ No participants found in {chat_id} - Assistant might not have joined yet")
+            except exceptions.NoActiveGroupCall:
+                LOGGER(__name__).error(f"❌ No active group call in {chat_id} - Assistant needs to join first")
+                raise AssistantErr("No active voice chat! Please start a voice chat in your group first.")
             except Exception as e:
-                LOGGER(__name__).warning(f"⚠️ Could not get participants: {type(e).__name__} - Bot may not be in VC yet")
+                LOGGER(__name__).warning(f"⚠️ Could not get participants: {type(e).__name__} - Will attempt to join anyway")
             
             # Play with auto_start to immediately begin playback
             result = await asyncio.wait_for(
@@ -146,19 +153,19 @@ class Call(PyTgCalls):
                 
         except asyncio.TimeoutError:
             LOGGER(__name__).error(f"⏰ Timeout playing stream in {chat_id} after 10s")
-            raise AssistantErr("Playback timeout - please try again")
-        except exceptions.NoActiveGroupCall:
-            LOGGER(__name__).error(f"❌ No active group call in {chat_id}")
-            raise
+            raise AssistantErr("⏰ Playback timeout - The assistant is having trouble joining. Please try again or restart the voice chat.")
+        except exceptions.NoActiveGroupCall as e:
+            LOGGER(__name__).error(f"❌ No active group call in {chat_id}: {e}")
+            raise AssistantErr("❌ No active voice chat! Make sure there's an active voice chat in your group.")
         except exceptions.NoAudioSourceFound:
             LOGGER(__name__).error(f"❌ No audio source found in {chat_id}")
-            raise
+            raise AssistantErr("❌ No audio source found - The file might be corrupted or invalid.")
         except (ConnectionNotFound, TelegramServerError) as e:
             LOGGER(__name__).error(f"❌ Connection error in {chat_id}: {type(e).__name__}")
-            raise
+            raise AssistantErr("❌ Connection error - Telegram servers might be busy. Please try again in a few seconds.")
         except Exception as e:
             LOGGER(__name__).error(f"❌ Unexpected error playing in {chat_id}: {type(e).__name__} - {str(e)}")
-            raise
+            raise AssistantErr(f"❌ Error joining voice chat: {type(e).__name__}. Make sure the assistant is added to your group and has permission to join voice chats.")
 
     async def pause_stream(self, chat_id: int):
         assistant = await group_assistant(self, chat_id)

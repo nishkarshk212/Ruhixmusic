@@ -115,12 +115,10 @@ class Call(PyTgCalls):
         chat_id: int,
         stream: types.MediaStream,
     ):
+        import asyncio
+        
         LOGGER(__name__).info(f"🎵 Attempting to play stream in {chat_id}")
         try:
-            # Check if there's an active voice chat first
-            from ntgcalls import GroupCallConfig
-            import asyncio
-            
             # Try to get participants to verify we're in the voice chat
             try:
                 participants = await client.get_participants(chat_id)
@@ -133,7 +131,7 @@ class Call(PyTgCalls):
                 client.play(
                     chat_id=chat_id,
                     stream=stream,
-                    config=GroupCallConfig(auto_start=True),
+                    config=types.GroupCallConfig(auto_start=True),
                 ),
                 timeout=10  # Wait max 10 seconds
             )

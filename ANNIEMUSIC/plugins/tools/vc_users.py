@@ -47,19 +47,44 @@ async def get_voice_chat_users(client: Client, message: Message):
             text += "━" * 30 + "\n"
             
             for i, participant in enumerate(participants, 1):
-                # Safely access participant.user attribute
+                # Safely access participant attributes - PyTgCalls uses 'peer' or direct attributes
                 try:
-                    user = participant.user
-                    user_name = user.first_name + (f" {user.last_name}" if user.last_name else "")
-                    user_id = user.id
-                    username = f"@{user.username}" if user.username else "No username"
+                    # Try different attribute patterns based on PyTgCalls version
+                    if hasattr(participant, 'peer'):
+                        # Newer PyTgCalls versions use peer.id
+                        user_id = participant.peer.id
+                        user_name = participant.username or f"User_{user_id}"
+                        username = f"@{participant.username}" if participant.username else "No username"
+                    elif hasattr(participant, 'id'):
+                        # Some versions have direct id
+                        user_id = participant.id
+                        user_name = getattr(participant, 'username', None) or f"User_{user_id}"
+                        username = f"@{participant.username}" if hasattr(participant, 'username') and participant.username else "No username"
+                    elif hasattr(participant, 'user'):
+                        # Fallback to old .user attribute
+                        user = participant.user
+                        user_name = user.first_name + (f" {user.last_name}" if user.last_name else "")
+                        user_id = user.id
+                        username = f"@{user.username}" if user.username else "No username"
+                    else:
+                        # Last resort - try to get any ID-like attribute
+                        user_id = getattr(participant, 'chat_id', getattr(participant, 'channel_id', 'Unknown'))
+                        user_name = f"User_{user_id}"
+                        username = "Unknown"
                     
                     text += f"\n{i}. <b>{user_name}</b>\n"
                     text += f"   └─ 🆔 <code>{user_id}</code>\n"
                     text += f"   └─ 📛 @{username}\n"
-                except AttributeError as attr_err:
-                    LOGGER(__name__).warning(f"Could not get user info for participant {i}: {attr_err}")
-                    continue  # Skip this participant and continue with others
+                except Exception as attr_err:
+                    LOGGER(__name__).warning(f"Could not get user info for participant {i}: {attr_err} - Type: {type(participant)}")
+                    # Try to at least show something
+                    try:
+                        user_id = str(getattr(participant, 'peer', getattr(participant, 'id', 'Unknown')))
+                        text += f"\n{i}. <b>User_{user_id}</b>\n"
+                        text += f"   └─ 🆔 <code>{user_id}</code>\n"
+                    except:
+                        text += f"\n{i}. <b>Unknown Participant</b>\n"
+                    continue  # Continue with other participants
             
             text += "\n" + "━" * 30
             

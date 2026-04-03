@@ -95,3 +95,56 @@ async def leave_voice_chat(client: Client, message: Message):
         
     except Exception as e:
         await message.reply_text(f"❌ Failed to get assistant: {type(e).__name__}")
+
+
+@app.on_message(filters.command(["checkpart", "debugvc"], prefixes=["/", "!"]) & filters.group & SUDOERS)
+async def debug_participants(client: Client, message: Message):
+    """Debug command to check participant object structure"""
+    
+    chat_id = message.chat.id
+    mystic = await message.reply_text("🔍 Debugging participant data...")
+    
+    try:
+        assistant = await group_assistant(JARVIS, chat_id)
+        participants = await assistant.get_participants(chat_id)
+        
+        if not participants:
+            return await mystic.edit_text("📭 No participants found")
+        
+        text = f"🔍 **Participant Debug Info**\n\n"
+        text += f"Total: {len(participants)}\n\n"
+        
+        # Show structure of first participant
+        first = participants[0]
+        text += f"**Type:** `{type(first)}`\n"
+        text += f"**Dir:** `{[attr for attr in dir(first) if not attr.startswith('_')]}`\n\n"
+        
+        # Try to extract info using different methods
+        text += "**Attempted Extraction:**\n"
+        
+        if hasattr(first, 'peer'):
+            text += f"✓ Has peer: `{first.peer}`\n"
+            if hasattr(first.peer, 'id'):
+                text += f"  └─ ID: `{first.peer.id}`\n"
+        else:
+            text += "✗ No peer attribute\n"
+            
+        if hasattr(first, 'user'):
+            text += f"✓ Has user: `{first.user}`\n"
+        else:
+            text += "✗ No user attribute\n"
+            
+        if hasattr(first, 'id'):
+            text += f"✓ Has id: `{first.id}`\n"
+        else:
+            text += "✗ No id attribute\n"
+            
+        if hasattr(first, 'username'):
+            text += f"✓ Has username: `{first.username}`\n"
+        else:
+            text += "✗ No username attribute\n"
+        
+        await mystic.edit_text(text)
+        
+    except Exception as e:
+        await mystic.edit_text(f"❌ Error: {type(e).__name__}\n{str(e)}")

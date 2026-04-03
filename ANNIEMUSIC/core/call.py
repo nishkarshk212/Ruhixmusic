@@ -322,9 +322,10 @@ class Call(PyTgCalls):
         
         for attempt in range(max_retries):
             try:
+                LOGGER(__name__).info(f"🎵 Attempt {attempt + 1}/{max_retries} - Calling _play_on_assistant for {chat_id}")
                 await self._play_on_assistant(assistant, chat_id, stream)
                 joined_successfully = True
-                LOGGER(__name__).info(f"Successfully joined voice chat in {chat_id}")
+                LOGGER(__name__).info(f"✅ Successfully joined voice chat in {chat_id} - Music should be playing!")
                 break  # Success!
             except exceptions.NoActiveGroupCall:
                 LOGGER(__name__).warning(f"No active voice chat in {chat_id}, attempt {attempt + 1}/{max_retries}")

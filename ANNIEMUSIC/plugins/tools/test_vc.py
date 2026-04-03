@@ -72,7 +72,28 @@ async def leave_voice_chat(client: Client, message: Message):
     try:
         assistant = await group_assistant(JARVIS, chat_id)
         
-        # Check if assistant is actually in a voice chat before trying to leave
+        # First check if there are participants (proves assistant is in VC)
+        try:
+            participants = await assistant.get_participants(chat_id)
+            if participants and len(participants) > 0:
+                # Assistant IS in voice chat! Proceed to leave
+                pass
+            else:
+                return await message.reply_text(
+                    "ℹ️ No participants found in voice chat.\n\n"
+                    "The voice chat might be empty or assistant hasn't joined yet."
+                )
+        except Exception as vc_check:
+            # If we can't get participants, assistant might not be in VC
+            error_type = type(vc_check).__name__
+            if "NotInCallError" in str(error_type) or "not in a call" in str(error_type).lower():
+                return await message.reply_text(
+                    "ℹ️ Assistant is not in any voice chat right now.\n\n"
+                    "No action needed - the voice chat might have already ended."
+                )
+            # Other errors - continue with leave attempt
+        
+        # Try to leave the voice chat
         try:
             await assistant.leave_call(chat_id, close=False)
             
@@ -83,15 +104,15 @@ async def leave_voice_chat(client: Client, message: Message):
             
             await message.reply_text("✅ Left voice chat successfully!")
             
-        except Exception as e:
-            error_type = type(e).__name__
-            if "NotInCallError" in str(error_type) or "not in a call" in str(e).lower():
+        except Exception as leave_error:
+            error_type = type(leave_error).__name__
+            if "NotInCallError" in str(error_type) or "not in a call" in str(leave_error).lower():
                 await message.reply_text(
                     "ℹ️ Assistant is not in any voice chat right now.\n\n"
                     "No action needed - the voice chat might have already ended."
                 )
             else:
-                await message.reply_text(f"❌ Error leaving voice chat: {error_type}\n{str(e)}")
+                await message.reply_text(f"❌ Error leaving voice chat: {error_type}\n{str(leave_error)}")
         
     except Exception as e:
         await message.reply_text(f"❌ Failed to get assistant: {type(e).__name__}")

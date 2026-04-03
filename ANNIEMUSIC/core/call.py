@@ -117,23 +117,31 @@ class Call(PyTgCalls):
     ):
         LOGGER(__name__).info(f"Attempting to play stream in {chat_id}")
         try:
-            result = await client.play(
-                chat_id=chat_id,
-                stream=stream,
-                config=types.GroupCallConfig(auto_start=True),
+            # Use asyncio.wait_for to prevent hanging indefinitely
+            import asyncio
+            result = await asyncio.wait_for(
+                client.play(
+                    chat_id=chat_id,
+                    stream=stream,
+                    config=types.GroupCallConfig(auto_start=True),
+                ),
+                timeout=10  # Wait max 10 seconds
             )
-            LOGGER(__name__).info(f"Play command executed in {chat_id}: {result}")
+            LOGGER(__name__).info(f"✅ Play command executed in {chat_id}: {type(result)}")
+        except asyncio.TimeoutError:
+            LOGGER(__name__).error(f"⏰ Timeout playing stream in {chat_id} after 10s")
+            raise AssistantErr("Playback timeout - please try again")
         except exceptions.NoActiveGroupCall:
-            LOGGER(__name__).error(f"No active group call in {chat_id}")
+            LOGGER(__name__).error(f"❌ No active group call in {chat_id}")
             raise
         except exceptions.NoAudioSourceFound:
-            LOGGER(__name__).error(f"No audio source found in {chat_id}")
+            LOGGER(__name__).error(f"❌ No audio source found in {chat_id}")
             raise
         except (ConnectionNotFound, TelegramServerError) as e:
-            LOGGER(__name__).error(f"Connection error in {chat_id}: {type(e).__name__}")
+            LOGGER(__name__).error(f"❌ Connection error in {chat_id}: {type(e).__name__}")
             raise
         except Exception as e:
-            LOGGER(__name__).error(f"Unexpected error playing in {chat_id}: {type(e).__name__} - {str(e)}")
+            LOGGER(__name__).error(f"❌ Unexpected error playing in {chat_id}: {type(e).__name__} - {str(e)}")
             raise
 
     async def pause_stream(self, chat_id: int):

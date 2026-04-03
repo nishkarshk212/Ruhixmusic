@@ -99,11 +99,11 @@ class Call(PyTgCalls):
         LOGGER(__name__).info(f"🎵 Building stream from: {source[:50] if len(source) > 50 else source}")
         LOGGER(__name__).info(f"🔧 FFmpeg params: {custom_ffmpeg}")
         
+        # Build MediaStream without audio_flags (not available in all PyTgCalls versions)
         return types.MediaStream(
             media_path=source,
             audio_parameters=types.AudioQuality.HIGH,
             video_parameters=types.VideoQuality.HD_720p,
-            audio_flags=types.MediaStream.Flags.NONE,  # Changed from REQUIRED to NONE for ntgcalls
             video_flags=(
                 types.MediaStream.Flags.AUTO_DETECT
                 if video

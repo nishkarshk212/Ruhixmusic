@@ -115,19 +115,37 @@ class Call(PyTgCalls):
         chat_id: int,
         stream: types.MediaStream,
     ):
-        LOGGER(__name__).info(f"Attempting to play stream in {chat_id}")
+        LOGGER(__name__).info(f"🎵 Attempting to play stream in {chat_id}")
         try:
-            # Use asyncio.wait_for to prevent hanging indefinitely
+            # Check if there's an active voice chat first
+            from ntgcalls import GroupCallConfig
             import asyncio
+            
+            # Try to get participants to verify we're in the voice chat
+            try:
+                participants = await client.get_participants(chat_id)
+                LOGGER(__name__).info(f"👥 Found {len(participants)} participants in voice chat {chat_id}")
+            except Exception as e:
+                LOGGER(__name__).warning(f"⚠️ Could not get participants: {type(e).__name__} - Bot may not be in VC yet")
+            
+            # Play with auto_start to immediately begin playback
             result = await asyncio.wait_for(
                 client.play(
                     chat_id=chat_id,
                     stream=stream,
-                    config=types.GroupCallConfig(auto_start=True),
+                    config=GroupCallConfig(auto_start=True),
                 ),
                 timeout=10  # Wait max 10 seconds
             )
             LOGGER(__name__).info(f"✅ Play command executed in {chat_id}: {type(result)}")
+            
+            # Verify playback started
+            try:
+                is_playing = await client.is_playing(chat_id)
+                LOGGER(__name__).info(f"▶️ Playback status for {chat_id}: {is_playing}")
+            except:
+                pass
+                
         except asyncio.TimeoutError:
             LOGGER(__name__).error(f"⏰ Timeout playing stream in {chat_id} after 10s")
             raise AssistantErr("Playback timeout - please try again")

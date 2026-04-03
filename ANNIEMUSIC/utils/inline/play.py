@@ -37,6 +37,15 @@ def track_markup(_, user_id, channel, fplay):
 
 
 def stream_markup_timer(_, chat_id, played, dur):
+    # Convert @username to https://t.me/username format for buttons
+    support_channel = SUPPORT_CHANNEL
+    if support_channel.startswith("@"):
+        support_channel = f"https://t.me/{support_channel[1:]}"
+    
+    support_chat = SUPPORT_CHAT
+    if support_chat.startswith("@"):
+        support_chat = f"https://t.me/{support_chat[1:]}"
+    
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100
@@ -81,11 +90,11 @@ def stream_markup_timer(_, chat_id, played, dur):
         [
             InlineKeyboardButton(
                 text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
-                url=f"{SUPPORT_CHANNEL}",
+                url=support_channel,
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
-                url=f"{SUPPORT_CHAT}",
+                url=support_chat,
             ),
         ],
     ]
@@ -93,6 +102,15 @@ def stream_markup_timer(_, chat_id, played, dur):
     return buttons
 
 def telegram_markup_timer(_, chat_id, played, dur):
+    # Convert @username to https://t.me/username format for buttons
+    support_channel = SUPPORT_CHANNEL
+    if support_channel.startswith("@"):
+        support_channel = f"https://t.me/{support_channel[1:]}"
+    
+    support_chat = SUPPORT_CHAT
+    if support_chat.startswith("@"):
+        support_chat = f"https://t.me/{support_chat[1:]}"
+    
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100
@@ -137,11 +155,11 @@ def telegram_markup_timer(_, chat_id, played, dur):
         [
             InlineKeyboardButton(
                 text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
-                url=f"{SUPPORT_CHANNEL}",
+                url=support_channel,
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
-                url=f"{SUPPORT_CHAT}",
+                url=support_chat,
             ),
         ],
     ]
@@ -149,6 +167,15 @@ def telegram_markup_timer(_, chat_id, played, dur):
     return buttons
 
 def stream_markup(_, chat_id):
+    # Convert @username to https://t.me/username format for buttons
+    support_channel = SUPPORT_CHANNEL
+    if support_channel.startswith("@"):
+        support_channel = f"https://t.me/{support_channel[1:]}"
+    
+    support_chat = SUPPORT_CHAT
+    if support_chat.startswith("@"):
+        support_chat = f"https://t.me/{support_chat[1:]}"
+    
     buttons  = [
 
         [
@@ -167,11 +194,11 @@ def stream_markup(_, chat_id):
         [
             InlineKeyboardButton(
                 text="๏ ᴜᴘᴅᴀᴛᴇ ๏",
-                url=f"{SUPPORT_CHANNEL}",
+                url=support_channel,
             ),
             InlineKeyboardButton(
                 text="🖤𝐂ʜᴀᴛ😈",
-                url=f"{SUPPORT_CHAT}",
+                url=support_chat,
             ),
         ],
     ]

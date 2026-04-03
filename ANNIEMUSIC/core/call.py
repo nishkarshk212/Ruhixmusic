@@ -279,14 +279,9 @@ class Call(PyTgCalls):
     ):
         # Validate that link is not None
         if not link:
-            LOGGER(__name__).error(f"join_call received empty link for chat {chat_id}")
             raise AssistantErr(_["call_10"])
-        
-        LOGGER(__name__).info(f"Attempting to join voice chat in {chat_id} with link: {link[:50]}...")
             
         assistant = await group_assistant(self, chat_id)
-        LOGGER(__name__).info(f"Selected assistant for chat {chat_id}")
-        
         language = await get_lang(chat_id)
         _ = get_string(language)
         stream = self._build_stream(link, video=bool(video))
@@ -298,34 +293,27 @@ class Call(PyTgCalls):
         max_retries = 2
         retry_delay = 1.2  # Reduced from 1.5s for faster response
         
-        LOGGER(__name__).info(f"Starting voice chat connection attempt for chat {chat_id}...")
         # Initial sync delay - helps PyTgCalls detect active voice chat
         await asyncio.sleep(initial_sync_delay)
         
         for attempt in range(max_retries):
             try:
-                LOGGER(__name__).info(f"Attempt {attempt + 1}/{max_retries} for chat {chat_id}")
                 await self._play_on_assistant(assistant, chat_id, stream)
-                LOGGER(__name__).info(f"Successfully joined voice chat in {chat_id}")
                 return  # Success on first try (~90% cases)
-            except exceptions.NoActiveGroupCall as e:
-                LOGGER(__name__).warning(f"No active voice chat found in {chat_id}, attempt {attempt + 1}")
+            except exceptions.NoActiveGroupCall:
                 if attempt < max_retries - 1:
                     # Retry after delay - catches edge cases (~9% cases)
                     await asyncio.sleep(retry_delay)
                     continue
                 else:
                     # All attempts failed - genuine error (~1% cases)
-                    LOGGER(__name__).error(f"All attempts failed for chat {chat_id} - NoActiveGroupCall")
                     raise AssistantErr(_["call_8"])
-            except exceptions.NoAudioSourceFound as e:
-                LOGGER(__name__).error(f"No audio source found in chat {chat_id}: {e}")
+            except exceptions.NoAudioSourceFound:
                 raise AssistantErr(_["call_10"])
-            except (ConnectionNotFound, TelegramServerError) as e:
-                LOGGER(__name__).error(f"Connection error in chat {chat_id}: {e}")
+            except (ConnectionNotFound, TelegramServerError):
                 raise AssistantErr(_["call_10"])
             except Exception as e:
-                LOGGER(__name__).error(f"Unexpected error in join_call for chat {chat_id}: {type(e).__name__} - {e}")
+                LOGGER(__name__).error(f"Unexpected error in join_call: {e}")
                 raise AssistantErr(_["call_10"])
         
         await add_active_chat(chat_id)

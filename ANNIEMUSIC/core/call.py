@@ -134,15 +134,8 @@ class Call(PyTgCalls):
             )
             LOGGER(__name__).info(f"✅ Play command executed in {chat_id}: {type(result)}")
             
-            # Verify playback started by checking is_playing
-            await asyncio.sleep(1)  # Give it a moment to start
-            try:
-                is_playing = await client.is_playing(chat_id)
-                LOGGER(__name__).info(f"▶️ Playback status for {chat_id}: {is_playing}")
-                if not is_playing:
-                    LOGGER(__name__).warning(f"⚠️ Playback reported as not playing in {chat_id}")
-            except Exception as check_err:
-                LOGGER(__name__).warning(f"⚠️ Could not verify playback: {type(check_err).__name__}")
+            # Don't verify playback - is_playing() may not exist in all PyTgCalls versions
+            # Just trust that play() succeeded
                 
         except asyncio.TimeoutError:
             LOGGER(__name__).error(f"⏰ Timeout playing stream in {chat_id} after 10s")

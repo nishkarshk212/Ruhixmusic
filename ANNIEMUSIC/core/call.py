@@ -120,20 +120,8 @@ class Call(PyTgCalls):
         LOGGER(__name__).info(f"🎵 Attempting to play stream in {chat_id}")
         
         try:
-            # First verify assistant is in the voice chat by getting participants
-            try:
-                participants = await client.get_participants(chat_id)
-                LOGGER(__name__).info(f"👥 Found {len(participants)} participants in voice chat {chat_id}")
-                
-                if len(participants) == 0:
-                    LOGGER(__name__).warning(f"⚠️ No participants found in {chat_id} - Assistant might not have joined yet")
-            except exceptions.NoActiveGroupCall:
-                LOGGER(__name__).error(f"❌ No active group call in {chat_id} - Assistant needs to join first")
-                raise AssistantErr("No active voice chat! Please start a voice chat in your group first.")
-            except Exception as e:
-                LOGGER(__name__).warning(f"⚠️ Could not get participants: {type(e).__name__} - Will attempt to join anyway")
-            
             # Play with auto_start to immediately begin playback
+            # Note: Skipping get_participants() check for ntgcalls compatibility
             result = await asyncio.wait_for(
                 client.play(
                     chat_id=chat_id,

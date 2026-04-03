@@ -1,6 +1,7 @@
 import os
 from random import randint
 from typing import Union
+from logging import getLogger
 
 from pyrogram.types import InlineKeyboardMarkup
 
@@ -14,6 +15,8 @@ from ANNIEMUSIC.utils.inline import aq_markup, close_markup, stream_markup
 from ANNIEMUSIC.utils.pastebin import ANNIEBIN
 from ANNIEMUSIC.utils.stream.queue import put_queue, put_queue_index
 from ANNIEMUSIC.utils.thumbnails import get_thumb
+
+LOGGER = getLogger(__name__)
 
 
 async def stream(
@@ -84,13 +87,17 @@ async def stream(
                     raise
                 except:
                     raise AssistantErr(_["play_14"])
-                await JARVIS.join_call(
-                    chat_id,
-                    original_chat_id,
-                    file_path,
-                    video=status,
-                    image=thumbnail,
-                )
+                try:
+                    await JARVIS.join_call(
+                        chat_id,
+                        original_chat_id,
+                        file_path,
+                        video=status,
+                        image=thumbnail,
+                    )
+                except Exception as e:
+                    LOGGER(__name__).error(f"join_call failed: {type(e).__name__} - {str(e)}")
+                    raise
                 await put_queue(
                     chat_id,
                     original_chat_id,

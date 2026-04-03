@@ -301,9 +301,14 @@ async def play_commnd(
                     forceplay=fplay,
                 )
             except Exception as e:
-                # DEBUG MODE: ERROR PRINT ON CHAT
+                # Log full error to logger group
                 err_msg = traceback.format_exc()
-                await mystic.edit_text(f"❌ **Error in Soundcloud Stream:**\n\n`{err_msg}`")
+                await app.send_message(
+                    chat_id=config.LOGGER_ID,
+                    text=f"❌ **Error in Soundcloud Stream:**\n\n`{err_msg}`"
+                )
+                # Show simple message to user
+                await mystic.edit_text(_["play_14"])
                 return
             return await mystic.delete()
         else:
@@ -332,9 +337,14 @@ async def play_commnd(
                     forceplay=fplay,
                 )
             except Exception as e:
-                # DEBUG MODE: ERROR PRINT ON CHAT
+                # Log full error to logger group
                 err_msg = traceback.format_exc()
-                await mystic.edit_text(f"❌ **Error in Index Stream:**\n\n`{err_msg}`")
+                await app.send_message(
+                    chat_id=config.LOGGER_ID,
+                    text=f"❌ **Error in Index Stream:**\n\n`{err_msg}`"
+                )
+                # Show simple message to user
+                await mystic.edit_text(_["play_14"])
                 return
             return await play_logs(message, streamtype="M3u8 or Index Link")
     else:
@@ -393,9 +403,14 @@ async def play_commnd(
                 forceplay=fplay,
             )
         except Exception as e:
-            # DEBUG MODE: ERROR PRINT ON CHAT
+            # Log full error to logger group
             err_msg = traceback.format_exc()
-            await mystic.edit_text(f"❌ **Error in Direct Stream:**\n\n`{err_msg}`")
+            await app.send_message(
+                chat_id=config.LOGGER_ID,
+                text=f"❌ **Error in Direct Stream:**\n\n`{err_msg}`"
+            )
+            # Show simple message to user
+            await mystic.edit_text(_["play_14"])
             return
         await mystic.delete()
         return await play_logs(message, streamtype=streamtype)

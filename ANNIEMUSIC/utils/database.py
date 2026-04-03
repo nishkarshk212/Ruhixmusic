@@ -124,6 +124,7 @@ async def set_calls_assistant(chat_id):
 
 async def group_assistant(self, chat_id: int) -> int:
     from ANNIEMUSIC.core.userbot import assistants
+    from ANNIEMUSIC import LOGGER
 
     assistant = assistantdict.get(chat_id)
     if not assistant:
@@ -142,6 +143,10 @@ async def group_assistant(self, chat_id: int) -> int:
             assis = assistant
         else:
             assis = await set_calls_assistant(chat_id)
+    
+    # Log which assistant is being used
+    LOGGER("ASSISTANT").info(f"Using assistant {assis} for chat {chat_id}")
+    
     if int(assis) == 1:
         return self.one
     elif int(assis) == 2:

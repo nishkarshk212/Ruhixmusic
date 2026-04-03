@@ -286,6 +286,11 @@ class Call(PyTgCalls):
         _ = get_string(language)
         stream = self._build_stream(link, video=bool(video))
         
+        # Check if assistant client is running
+        if not assistant.is_running:
+            LOGGER(__name__).error(f"Assistant client for chat {chat_id} is not running!")
+            raise AssistantErr("Assistant account is not active. Please try again.")
+        
         # Smart Adaptive Voice Chat Detection
         # Combines initial delay + retry for maximum reliability
         # Tested approach: 0.3s delay + 1 retry (2 attempts total)
@@ -312,7 +317,8 @@ class Call(PyTgCalls):
                 raise AssistantErr(_["call_10"])
             except (ConnectionNotFound, TelegramServerError):
                 raise AssistantErr(_["call_10"])
-            except Exception:
+            except Exception as e:
+                LOGGER(__name__).error(f"Unexpected error in join_call: {e}")
                 raise AssistantErr(_["call_10"])
         
         await add_active_chat(chat_id)

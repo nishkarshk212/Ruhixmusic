@@ -47,27 +47,37 @@ async def get_voice_chat_users(client: Client, message: Message):
             text += "━" * 30 + "\n"
             
             for i, participant in enumerate(participants, 1):
-                # Safely access participant attributes - PyTgCalls uses 'peer' or direct attributes
+                # Safely access participant attributes - Multiple PyTgCalls API versions supported
                 try:
-                    # Try different attribute patterns based on PyTgCalls version
-                    if hasattr(participant, 'peer'):
-                        # Newer PyTgCalls versions use peer.id
+                    # YOUR VERSION: Uses user_id directly (ntgcalls/newer PyTgCalls)
+                    if hasattr(participant, 'user_id'):
+                        user_id = participant.user_id
+                        # For this version, we need to fetch user details separately
+                        # Since we only have ID, show it nicely
+                        user_name = f"User {user_id}"
+                        username = "In Voice Chat"
+                    
+                    # Newer PyTgCalls versions use peer.id
+                    elif hasattr(participant, 'peer'):
                         user_id = participant.peer.id
                         user_name = participant.username or f"User_{user_id}"
                         username = f"@{participant.username}" if participant.username else "No username"
+                    
+                    # Some versions have direct id
                     elif hasattr(participant, 'id'):
-                        # Some versions have direct id
                         user_id = participant.id
                         user_name = getattr(participant, 'username', None) or f"User_{user_id}"
                         username = f"@{participant.username}" if hasattr(participant, 'username') and participant.username else "No username"
+                    
+                    # Fallback to old .user attribute
                     elif hasattr(participant, 'user'):
-                        # Fallback to old .user attribute
                         user = participant.user
                         user_name = user.first_name + (f" {user.last_name}" if user.last_name else "")
                         user_id = user.id
                         username = f"@{user.username}" if user.username else "No username"
+                    
+                    # Last resort - try to get any ID-like attribute
                     else:
-                        # Last resort - try to get any ID-like attribute
                         user_id = getattr(participant, 'chat_id', getattr(participant, 'channel_id', 'Unknown'))
                         user_name = f"User_{user_id}"
                         username = "Unknown"
@@ -75,13 +85,18 @@ async def get_voice_chat_users(client: Client, message: Message):
                     text += f"\n{i}. <b>{user_name}</b>\n"
                     text += f"   └─ 🆔 <code>{user_id}</code>\n"
                     text += f"   └─ 📛 @{username}\n"
+                    
                 except Exception as attr_err:
                     LOGGER(__name__).warning(f"Could not get user info for participant {i}: {attr_err} - Type: {type(participant)}")
-                    # Try to at least show something
+                    # Try to at least show the user_id if available
                     try:
-                        user_id = str(getattr(participant, 'peer', getattr(participant, 'id', 'Unknown')))
-                        text += f"\n{i}. <b>User_{user_id}</b>\n"
-                        text += f"   └─ 🆔 <code>{user_id}</code>\n"
+                        if hasattr(participant, 'user_id'):
+                            user_id = participant.user_id
+                            text += f"\n{i}. <b>User {user_id}</b>\n"
+                            text += f"   └─ 🆔 <code>{user_id}</code>\n"
+                            text += f"   └─ 📛 In Voice Chat\n"
+                        else:
+                            text += f"\n{i}. <b>Unknown Participant</b>\n"
                     except:
                         text += f"\n{i}. <b>Unknown Participant</b>\n"
                     continue  # Continue with other participants

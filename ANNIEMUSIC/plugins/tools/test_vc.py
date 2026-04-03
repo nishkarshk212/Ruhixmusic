@@ -122,6 +122,12 @@ async def debug_participants(client: Client, message: Message):
         # Try to extract info using different methods
         text += "**Attempted Extraction:**\n"
         
+        # Check for user_id (your version uses this)
+        if hasattr(first, 'user_id'):
+            text += f"✓ Has user_id: `{first.user_id}` ← **YOUR VERSION USES THIS**\n"
+        else:
+            text += "✗ No user_id attribute\n"
+        
         if hasattr(first, 'peer'):
             text += f"✓ Has peer: `{first.peer}`\n"
             if hasattr(first.peer, 'id'):

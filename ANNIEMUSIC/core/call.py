@@ -277,14 +277,22 @@ class Call(PyTgCalls):
         video: Union[bool, str] = None,
         image: Union[bool, str] = None,
     ):
-        # Validate that link is not None
-        if not link:
+        # Validate that link is not None or empty
+        if not link or link.strip() == "":
+            LOGGER(__name__).error(f"join_call received empty or invalid link for chat {chat_id}")
             raise AssistantErr(_["call_10"])
+        
+        LOGGER(__name__).info(f"Joining voice chat in {chat_id} with link: {link[:50] if len(link) > 50 else link}")
             
         assistant = await group_assistant(self, chat_id)
         language = await get_lang(chat_id)
         _ = get_string(language)
-        stream = self._build_stream(link, video=bool(video))
+        
+        try:
+            stream = self._build_stream(link, video=bool(video))
+        except Exception as e:
+            LOGGER(__name__).error(f"Failed to build stream: {e}")
+            raise AssistantErr(_["call_10"])
         
         # Smart Adaptive Voice Chat Detection
         # Combines initial delay + retry for maximum reliability
@@ -296,35 +304,45 @@ class Call(PyTgCalls):
         # Initial sync delay - helps PyTgCalls detect active voice chat
         await asyncio.sleep(initial_sync_delay)
         
+        joined_successfully = False
+        
         for attempt in range(max_retries):
             try:
                 await self._play_on_assistant(assistant, chat_id, stream)
-                return  # Success on first try (~90% cases)
+                joined_successfully = True
+                LOGGER(__name__).info(f"Successfully joined voice chat in {chat_id}")
+                break  # Success!
             except exceptions.NoActiveGroupCall:
+                LOGGER(__name__).warning(f"No active voice chat in {chat_id}, attempt {attempt + 1}/{max_retries}")
                 if attempt < max_retries - 1:
                     # Retry after delay - catches edge cases (~9% cases)
                     await asyncio.sleep(retry_delay)
                     continue
                 else:
                     # All attempts failed - genuine error (~1% cases)
+                    LOGGER(__name__).error(f"All retry attempts failed for chat {chat_id}")
                     raise AssistantErr(_["call_8"])
             except exceptions.NoAudioSourceFound:
+                LOGGER(__name__).error(f"No audio source found in chat {chat_id}")
                 raise AssistantErr(_["call_10"])
-            except (ConnectionNotFound, TelegramServerError):
+            except (ConnectionNotFound, TelegramServerError) as e:
+                LOGGER(__name__).error(f"Connection error in chat {chat_id}: {type(e).__name__}")
                 raise AssistantErr(_["call_10"])
             except Exception as e:
-                LOGGER(__name__).error(f"Unexpected error in join_call: {e}")
+                LOGGER(__name__).error(f"Unexpected error in join_call for chat {chat_id}: {type(e).__name__} - {str(e)}")
                 raise AssistantErr(_["call_10"])
         
-        await add_active_chat(chat_id)
-        await music_on(chat_id)
-        if video:
-            await add_active_video_chat(chat_id)
-        if await is_autoend():
-            counter[chat_id] = {}
-            users = len(await assistant.get_participants(chat_id))
-            if users == 1:
-                autoend[chat_id] = datetime.now() + timedelta(minutes=1)
+        # Only update database if we successfully joined
+        if joined_successfully:
+            await add_active_chat(chat_id)
+            await music_on(chat_id)
+            if video:
+                await add_active_video_chat(chat_id)
+            if await is_autoend():
+                counter[chat_id] = {}
+                users = len(await assistant.get_participants(chat_id))
+                if users == 1:
+                    autoend[chat_id] = datetime.now() + timedelta(minutes=1)
 
     async def change_stream(self, client: PyTgCalls, chat_id: int):
         check = db.get(chat_id)

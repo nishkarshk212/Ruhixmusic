@@ -96,11 +96,14 @@ class Call(PyTgCalls):
         if ffmpeg:
             custom_ffmpeg = f"{ffmpeg} {custom_ffmpeg}"
         
+        LOGGER(__name__).info(f"🎵 Building stream from: {source[:50] if len(source) > 50 else source}")
+        LOGGER(__name__).info(f"🔧 FFmpeg params: {custom_ffmpeg}")
+        
         return types.MediaStream(
             media_path=source,
             audio_parameters=types.AudioQuality.HIGH,
             video_parameters=types.VideoQuality.HD_720p,
-            audio_flags=types.MediaStream.Flags.REQUIRED,
+            audio_flags=types.MediaStream.Flags.NONE,  # Changed from REQUIRED to NONE for ntgcalls
             video_flags=(
                 types.MediaStream.Flags.AUTO_DETECT
                 if video
@@ -120,8 +123,7 @@ class Call(PyTgCalls):
         LOGGER(__name__).info(f"🎵 Attempting to play stream in {chat_id}")
         
         try:
-            # Play with auto_start to immediately begin playback
-            # Note: Skipping get_participants() check for ntgcalls compatibility
+            # Play with auto_start=True to immediately begin playback
             result = await asyncio.wait_for(
                 client.play(
                     chat_id=chat_id,
@@ -132,12 +134,15 @@ class Call(PyTgCalls):
             )
             LOGGER(__name__).info(f"✅ Play command executed in {chat_id}: {type(result)}")
             
-            # Verify playback started
+            # Verify playback started by checking is_playing
+            await asyncio.sleep(1)  # Give it a moment to start
             try:
                 is_playing = await client.is_playing(chat_id)
                 LOGGER(__name__).info(f"▶️ Playback status for {chat_id}: {is_playing}")
-            except:
-                pass
+                if not is_playing:
+                    LOGGER(__name__).warning(f"⚠️ Playback reported as not playing in {chat_id}")
+            except Exception as check_err:
+                LOGGER(__name__).warning(f"⚠️ Could not verify playback: {type(check_err).__name__}")
                 
         except asyncio.TimeoutError:
             LOGGER(__name__).error(f"⏰ Timeout playing stream in {chat_id} after 10s")

@@ -115,19 +115,25 @@ class Call(PyTgCalls):
         chat_id: int,
         stream: types.MediaStream,
     ):
+        LOGGER(__name__).info(f"Attempting to play stream in {chat_id}")
         try:
-            await client.play(
+            result = await client.play(
                 chat_id=chat_id,
                 stream=stream,
-                config=types.GroupCallConfig(auto_start=False),
+                config=types.GroupCallConfig(auto_start=True),
             )
+            LOGGER(__name__).info(f"Play command executed in {chat_id}: {result}")
         except exceptions.NoActiveGroupCall:
+            LOGGER(__name__).error(f"No active group call in {chat_id}")
             raise
         except exceptions.NoAudioSourceFound:
+            LOGGER(__name__).error(f"No audio source found in {chat_id}")
             raise
-        except (ConnectionNotFound, TelegramServerError):
+        except (ConnectionNotFound, TelegramServerError) as e:
+            LOGGER(__name__).error(f"Connection error in {chat_id}: {type(e).__name__}")
             raise
-        except Exception:
+        except Exception as e:
+            LOGGER(__name__).error(f"Unexpected error playing in {chat_id}: {type(e).__name__} - {str(e)}")
             raise
 
     async def pause_stream(self, chat_id: int):

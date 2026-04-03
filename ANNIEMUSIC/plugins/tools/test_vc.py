@@ -1,6 +1,6 @@
 from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from ANNIEMUSIC import app
+from ANNIEMUSIC import LOGGER, app
 from ANNIEMUSIC.misc import SUDOERS
 from ANNIEMUSIC.core.call import JARVIS
 from ANNIEMUSIC.utils.database import group_assistant, is_active_chat, add_active_chat, music_on
@@ -71,14 +71,27 @@ async def leave_voice_chat(client: Client, message: Message):
     
     try:
         assistant = await group_assistant(JARVIS, chat_id)
-        await assistant.leave_call(chat_id, close=False)
         
-        # Remove from active chats
-        from ANNIEMUSIC.utils.database import remove_active_chat, remove_active_video_chat
-        await remove_active_chat(chat_id)
-        await remove_active_video_chat(chat_id)
-        
-        await message.reply_text("✅ Left voice chat successfully!")
+        # Check if assistant is actually in a voice chat before trying to leave
+        try:
+            await assistant.leave_call(chat_id, close=False)
+            
+            # Remove from active chats
+            from ANNIEMUSIC.utils.database import remove_active_chat, remove_active_video_chat
+            await remove_active_chat(chat_id)
+            await remove_active_video_chat(chat_id)
+            
+            await message.reply_text("✅ Left voice chat successfully!")
+            
+        except Exception as e:
+            error_type = type(e).__name__
+            if "NotInCallError" in str(error_type) or "not in a call" in str(e).lower():
+                await message.reply_text(
+                    "ℹ️ Assistant is not in any voice chat right now.\n\n"
+                    "No action needed - the voice chat might have already ended."
+                )
+            else:
+                await message.reply_text(f"❌ Error leaving voice chat: {error_type}\n{str(e)}")
         
     except Exception as e:
-        await message.reply_text(f"❌ Error leaving voice chat: {type(e).__name__}")
+        await message.reply_text(f"❌ Failed to get assistant: {type(e).__name__}")

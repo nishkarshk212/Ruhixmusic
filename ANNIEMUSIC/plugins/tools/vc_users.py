@@ -1,6 +1,6 @@
 from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from ANNIEMUSIC import app
+from ANNIEMUSIC import LOGGER, app
 from ANNIEMUSIC.misc import SUDOERS
 from ANNIEMUSIC.core.call import JARVIS
 from ANNIEMUSIC.utils.database import group_assistant, is_active_chat
@@ -28,39 +28,76 @@ async def get_voice_chat_users(client: Client, message: Message):
         assistant = await group_assistant(JARVIS, chat_id)
         
         # Get participants from the voice chat
-        participants = await assistant.get_participants(chat_id)
-        
-        if not participants or len(participants) == 0:
-            return await mystic.edit_text(
-                "📭 No participants found in the voice chat.\n"
-                "This might happen if the bot just joined."
-            )
-        
-        # Build the participants list
-        text = f"🎤 <b>Voice Chat Participants</b>\n\n"
-        text += f"👥 <b>Total Users:</b> {len(participants)}\n\n"
-        text += f"<b>Users List:</b>\n"
-        text += "━" * 30 + "\n"
-        
-        for i, participant in enumerate(participants, 1):
-            user = participant.user
-            user_name = user.first_name + (f" {user.last_name}" if user.last_name else "")
-            user_id = user.id
-            username = f"@{user.username}" if user.username else "No username"
+        try:
+            participants = await assistant.get_participants(chat_id)
             
-            text += f"\n{i}. <b>{user_name}</b>\n"
-            text += f"   └─ 🆔 <code>{user_id}</code>\n"
-            text += f"   └─ 📛 @{username}\n"
-        
-        text += "\n" + "━" * 30
-        
-        # Add button to close
-        keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("✯ Close ✯", callback_data="close")]]
-        )
-        
-        await mystic.edit_text(text, reply_markup=keyboard)
+            if not participants or len(participants) == 0:
+                return await mystic.edit_text(
+                    "📭 No participants found in the voice chat.\n\n"
+                    "💡 This might happen if:\n"
+                    "• The bot just joined\n"
+                    "• Voice chat is empty\n"
+                    "• Assistant isn't actually in the VC"
+                )
+            
+            # Build the participants list
+            text = f"🎤 <b>Voice Chat Participants</b>\n\n"
+            text += f"👥 <b>Total Users:</b> {len(participants)}\n\n"
+            text += f"<b>Users List:</b>\n"
+            text += "━" * 30 + "\n"
+            
+            for i, participant in enumerate(participants, 1):
+                # Safely access participant.user attribute
+                try:
+                    user = participant.user
+                    user_name = user.first_name + (f" {user.last_name}" if user.last_name else "")
+                    user_id = user.id
+                    username = f"@{user.username}" if user.username else "No username"
+                    
+                    text += f"\n{i}. <b>{user_name}</b>\n"
+                    text += f"   └─ 🆔 <code>{user_id}</code>\n"
+                    text += f"   └─ 📛 @{username}\n"
+                except AttributeError as attr_err:
+                    LOGGER(__name__).warning(f"Could not get user info for participant {i}: {attr_err}")
+                    continue  # Skip this participant and continue with others
+            
+            text += "\n" + "━" * 30
+            
+            # Add button to close
+            keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("✯ Close ✯", callback_data="close")]]
+            )
+            
+            await mystic.edit_text(text, reply_markup=keyboard)
+            
+        except Exception as vc_error:
+            error_type = type(vc_error).__name__
+            
+            # Handle specific error types
+            if "NotInCallError" in error_type or "not in a call" in str(vc_error).lower():
+                await mystic.edit_text(
+                    "❌ Assistant is not in the voice chat!\n\n"
+                    "💡 To fix this:\n"
+                    "1. Make sure there's an active voice chat\n"
+                    "2. Play music to make the assistant join\n"
+                    "3. Then try /vcusers again"
+                )
+            elif "AttributeError" in error_type:
+                await mystic.edit_text(
+                    "⚠️ Error reading participant data\n\n"
+                    "This usually means the assistant isn't properly connected to the voice chat.\n\n"
+                    "💡 Try playing music first, then use this command again."
+                )
+            else:
+                await mystic.edit_text(
+                    f"❌ Error: {error_type}\n\n"
+                    f"Details: {str(vc_error)}\n\n"
+                    "Make sure the assistant is in the voice chat and it's active."
+                )
         
     except Exception as e:
-        error_msg = f"❌ Error getting participants: {type(e).__name__}"
-        await mystic.edit_text(error_msg)
+        await mystic.edit_text(
+            f"❌ Failed to connect to assistant: {type(e).__name__}\n"
+            f"Details: {str(e)}\n\n"
+            "Make sure the assistant is added to your group."
+        )

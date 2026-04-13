@@ -24,6 +24,7 @@ from ANNIEMUSIC.utils.database import (
 from ANNIEMUSIC.utils.decorators.language import LanguageStart
 from ANNIEMUSIC.utils.formatters import get_readable_time
 from ANNIEMUSIC.utils.inline import help_pannel, private_panel, start_panel
+from ANNIEMUSIC.utils.stickers import get_random_sticker
 from config import BANNED_USERS, AYUV
 from strings import get_string
 
@@ -71,7 +72,8 @@ async def start_pm(client, message: Message, _):
         name = message.text.split(None, 1)[1]
         if name[0:4] == "help":
             keyboard = help_pannel(_)
-            sticker_message = await message.reply_sticker(sticker=random.choice(STICKERS))
+            sticker_id = get_random_sticker() or random.choice(STICKERS)
+            sticker_message = await message.reply_sticker(sticker=sticker_id)
             asyncio.create_task(delete_sticker_after_delay(sticker_message, 5))  # Delete sticker after 2 seconds
             await message.reply_photo(
                 random.choice(ANNIE_VID),
@@ -124,8 +126,9 @@ async def start_pm(client, message: Message, _):
                 )
     else:
         out = private_panel(_)
-        sticker_message = await message.reply_sticker(sticker=random.choice(STICKERS))
-        asyncio.create_task(delete_sticker_after_delay(sticker_message, 2))  # Delete sticker after 2 seconds
+        sticker_id = get_random_sticker() or random.choice(STICKERS)
+        sticker_message = await message.reply_sticker(sticker=sticker_id)
+        asyncio.create_task(delete_sticker_after_delay(sticker_message, 5))
         served_chats = len(await get_served_chats())
         served_users = len(await get_served_users())
         UP, CPU, RAM, DISK = await bot_sys_stats()
